@@ -1,0 +1,6 @@
+.DS_Store
+env.py
+__pycache__
+.ipynb_checkpoints/
+.vscode/
+notes.txt
