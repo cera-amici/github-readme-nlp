@@ -30,7 +30,7 @@ def get_readme_from_repo(url):
     for line in readme_list:
         text_list.append(line.get_text())
     text = ' '.join(text_list)
-    retudrn title, text
+    return title, text
 
 def get_repo_urls(list_url):
     github_base = 'https://github.com/'
@@ -75,7 +75,7 @@ def get_all_repo_data(pages_per_language=10):
 
 def get_readme_data(fresh=False):
     if os.path.exists('github_readmes.csv') and not fresh:
-        df = pd.read_csv('github_readmes.csv')
+        df = pd.read_csv('github_readmes.csv', index_col=0)
     else:
         df = get_all_repo_data()
     return df
