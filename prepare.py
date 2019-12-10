@@ -20,7 +20,7 @@ def basic_clean(string):
     Normalize unicode characters
     Replace anything that is not a letter, number, whitespace or a single quote.
     """
-    string = string.lower()
+    string = str(string).lower()
     string = unicodedata.normalize('NFKD', string).encode('ascii', 'ignore').decode('utf-8', 'ignore')
     
     # remove anything not a space character, an apostrophe, letter, or number
@@ -76,10 +76,10 @@ def prepare_article_data(df, content='readme'):
     return df
 
 def get_prepped(csv=CSV, fresh=False):
-    if os.path.exists('prepped' + csv) and not fresh:
-        df = pd.read_csv('prepped' + csv, index_col = 0)
+    if os.path.exists('prepped_' + csv) and not fresh:
+        df = pd.read_csv('prepped_' + csv, index_col = 0)
     else:
         df = pd.read_csv(csv, index_col = 0)
         df = prepare_article_data(df)
-        df.to_csv('prepped' + csv)
+        df.to_csv('prepped_' + csv)
     return df

@@ -2,6 +2,7 @@ import pandas as pd
 from requests import get
 from bs4 import BeautifulSoup
 import os
+import time
 
 LANGUAGES = [
 'Python',
@@ -10,7 +11,7 @@ LANGUAGES = [
 'Shell'
 ]
 
-HEADERS = {'user-agent': 'cera-amici'}
+HEADERS = {'user-agent': 'sneakyboy123'}
 
 BASE_URL_START = 'https://github.com/search?l='
 BASE_URL_END = '&q=stars%3A%3E0&s=stars&type=Repositories'
@@ -51,7 +52,7 @@ def get_list_urls(languages=LANGUAGES, n=10):
             urls[language].append(get_url_repo_list(language, page))
     return urls
 
-def get_all_repo_data(pages_per_language=10):
+def get_all_repo_data(pages_per_language=2):
     dict_urls = get_list_urls(n=pages_per_language)
     urls_to_scrape = {}
     for language in dict_urls:
@@ -64,6 +65,9 @@ def get_all_repo_data(pages_per_language=10):
         repo_list = urls_to_scrape[language]
         for repo in repo_list:
             repo_data = get_readme_from_repo(repo)
+            while repo_data[1] is None:
+                time.sleep(10)
+                repo_data = get_readme_from_repo(repo)
             to_df.append({
                 'title': repo_data[0],
                 'readme': repo_data[1],
