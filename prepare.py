@@ -67,7 +67,7 @@ def remove_stopwords(text, extra_words=[], exclude_words=[]):
     text = " ".join(filtered)
     return text
 
-def prepare_article_data(df, content='readme'):
+def prepare_article_data(df, content='readme_contents'):
     df['original'] = df[content]
     df['cleaned'] = df.original.apply(basic_clean).apply(remove_stopwords)
     df['stemmed'] = df.cleaned.apply(stem)
@@ -82,4 +82,13 @@ def get_prepped(csv=CSV, fresh=False):
         df = pd.read_csv(csv, index_col = 0)
         df = prepare_article_data(df)
         df.to_csv('prepped_' + csv)
+    return df
+
+def prep(json='prepped_data.json', fresh=False):
+    if os.path.exists(json) and not fresh:
+        df = pd.read_json(json)
+    else:
+        df = pd.read_json('data.json')
+        df = prepare_article_data(df)
+        df.to_json(json)
     return df

@@ -11,16 +11,15 @@ LANGUAGES = [
 'Shell'
 ]
 
-HEADERS = {'user-agent': 'sneakyboy123'}
-
-BASE_URL_START = 'https://github.com/search?l='
-BASE_URL_END = '&q=stars%3A%3E0&s=stars&type=Repositories'
+HEADERS = {'user-agent': 'cera-amici'}
 
 def get_url_middle(language, page):
     return f'&l={language}&p={page}'
 
 def get_url_repo_list(language, page):
-    return BASE_URL_START + get_url_middle(language, page) + BASE_URL_END
+    url_start = 'https://github.com/search?l='
+    url_end = '&q=stars%3A%3E0&s=stars&type=Repositories'
+    return url_start + get_url_middle(language, page) + url_end
 
 def get_readme_from_repo(url):
     response = get(url, headers=HEADERS).content
