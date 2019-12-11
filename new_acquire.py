@@ -30,6 +30,9 @@ LANGUAGES = [
 'Shell'
 ]
 
+repos_per_language = 100
+pages_per_language = 15
+
 def get_url_middle(language, page):
     return f'&l={language}&p={page}'
 
@@ -49,7 +52,7 @@ def get_repo_urls(list_url):
         urls.append(repo_name)
     return urls
 
-def get_list_urls(languages=LANGUAGES, n=10):
+def get_list_urls(languages=LANGUAGES, n=pages_per_language):
     urls = []
     for language in LANGUAGES:
         for page in range(1, n+1):
@@ -58,12 +61,19 @@ def get_list_urls(languages=LANGUAGES, n=10):
 
 list_urls = get_list_urls()
 repos = []
-for url in list_urls:
-    thing = get_repo_urls(url)
-    while thing == []:
-        time.sleep(10)
-        thing = get_repo_urls(url)
-    repos.extend(thing)
+for i in range(4):
+    start = pages_per_language * i
+    end = start + pages_per_language
+    repo_count = 0
+    for url in list_urls[start:end]:
+        if repo_count >= repos_per_language:
+            break
+        repos_to_add = get_repo_urls(url)
+        while repos_to_add == []:
+            time.sleep(10)
+            repos_to_add = get_repo_urls(url)
+        repos.extend(repos_to_add)
+        repo_count += len(set(repos_to_add))
 
 headers = {
     "Authorization": f"token {github_token}",

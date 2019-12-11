@@ -11,6 +11,8 @@ from nltk.corpus import stopwords
 
 CSV = 'github_readmes.csv'
 
+ADDITIONAL_STOPWORDS = ['http', 'https', 'com', 'github', 'git', 'org', 'www']
+
 def normalize(string):
     return unicodedata.normalize('NFKD', string).encode('ascii', 'ignore').decode('utf-8', 'ignore')
 
@@ -51,7 +53,7 @@ def lemmatize(text):
     lemma_string = ' '.join(lemmas)
     return lemma_string
 
-def remove_stopwords(text, extra_words=[], exclude_words=[]):
+def remove_stopwords(text, extra_words=ADDITIONAL_STOPWORDS, exclude_words=[]):
     text = tokenize(text)
 
     text = text.split()
