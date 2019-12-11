@@ -11,7 +11,7 @@ from nltk.corpus import stopwords
 
 CSV = 'github_readmes.csv'
 
-ADDITIONAL_STOPWORDS = ['http', 'https', 'com', 'github', 'git', 'org', 'www']
+ADDITIONAL_STOPWORDS = ['http', 'https', 'com', 'github', 'git', 'org', 'www', 'code', 'file']
 
 def normalize(string):
     return unicodedata.normalize('NFKD', string).encode('ascii', 'ignore').decode('utf-8', 'ignore')
