@@ -24,7 +24,7 @@ def basic_clean(string):
     string = unicodedata.normalize('NFKD', string).encode('ascii', 'ignore').decode('utf-8', 'ignore')
     
     # remove anything not a space character, an apostrophe, letter, or number
-    string = re.sub(r"[^a-z\s]", '', string)
+    string = re.sub(r"[^a-z\s]", ' ', string)
 
     # drop weird words <=2 characters
     # string = re.sub(r'\b[a-z]{,2}\b', '', string)
