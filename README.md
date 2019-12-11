@@ -1,4 +1,4 @@
-# GitHub README Language Identification with Natural Language Processing
+# Identifying GitHub README Programming Languages with Natural Language Processing
 
 ***Goal:*** Build a model to predict the programming language of a GitHub repository based on its README file.
 
