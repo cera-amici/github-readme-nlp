@@ -90,5 +90,6 @@ def prep(json='prepped_data.json', fresh=False):
     else:
         df = pd.read_json('data.json')
         df = prepare_article_data(df)
+        df = df.rename(columns={'repo': 'title'})
         df.to_json(json)
     return df
