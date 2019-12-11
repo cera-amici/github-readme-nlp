@@ -30,7 +30,7 @@ def basic_clean(string):
     # string = re.sub(r'\b[a-z]{,2}\b', '', string)
 
     # convert newlines and tabs to a single space
-    string = re.sub(r'[\r|\n|\r\n]+', ' ', string)
+    string = re.sub(r'[\r|\n|\r\n|\t]+', ' ', string)
     string = string.strip()
     return string
 
