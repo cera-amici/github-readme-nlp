@@ -30,8 +30,8 @@ LANGUAGES = [
 'Shell'
 ]
 
-repos_per_language = 100
-pages_per_language = 15
+repos_per_language = 120
+pages_per_language = 16
 
 def get_url_middle(language, page):
     return f'&l={language}&p={page}'
