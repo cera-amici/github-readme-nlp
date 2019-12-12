@@ -59,7 +59,8 @@ def prevent_overfitting(tree_function, df, store=False):
     tfidf = TfidfVectorizer()
     x = tfidf.fit_transform(df.lemmatized)
     y = df.language
-    store_vectorizer(tfidf)
+    if store:
+        store_vectorizer(tfidf)
 
     x_train, x_test, y_train, y_test = train_test_split(x, y, stratify=y, test_size=.2, random_state=42)
 
