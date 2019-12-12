@@ -55,9 +55,11 @@ Instructions on setting up the GitHub README project and necessary steps to succ
 
 **corpus:** full set of documents or other text materials
 
-**term frequency:**
+**term frequency:** how often a word appears in a document
 
-**inverse document frequency:**
+**augmented term frequency:** term frequency, scaled such that the maximum TF is 1
+
+**inverse document frequency:** a measure of how many
 
 **TF-IDF:**
 
