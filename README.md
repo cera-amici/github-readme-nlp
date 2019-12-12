@@ -51,7 +51,7 @@ Instructions on setting up the GitHub README project and necessary steps to succ
 
 **stem:** reducing words to their root (or stem). simply removes ends of words and preserves the beginning that matches other words (e.g. stemming -> stem, stems -> stem, stemmata -> stem)
 
-**lemmatize:** reduces words to their grammatical base (or lemma) Notably different from stemming with irregular words (e.g. better -> good). 
+**lemmatize:** reduces words to their grammatical base (or lemma) Notably different from stemming with irregular words (e.g. better -> good)
 
 **corpus:** full set of documents or other text materials
 
@@ -59,9 +59,11 @@ Instructions on setting up the GitHub README project and necessary steps to succ
 
 **augmented term frequency:** term frequency, scaled such that the maximum TF is 1
 
-**inverse document frequency:** a measure of how many
+**inverse document frequency:** a measure of how many information a word provides
 
-**TF-IDF:**
+**TF-IDF:** the product of the TF and IDF
+
+**Stopwords:** words that are very common and are usually removed
 
 ### Data Dictionary
 
