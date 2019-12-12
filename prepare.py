@@ -69,29 +69,41 @@ def remove_stopwords(text, extra_words=ADDITIONAL_STOPWORDS, exclude_words=[]):
     text = " ".join(filtered)
     return text
 
-def prepare_article_data(df, content='readme_contents'):
+def drop_outliers(df):
+    df = df.drop(df[df.length > 140000].index)
+
+    languages = df.language.unique()
+    for language in languages:
+        n_drop = len(df[df.language == language]) - 100
+        to_drop = df[df.language == language].word_count.sort_values().head(n_drop)
+        df = df.drop(to_drop.index)
+    return df
+    
+def n_words(string):
+    return len(string.split())
+
+def n_unique_words(string):
+    return len(set(string.split()))
+
+def prepare_article_data(df, model, content='readme_contents'):
     df['original'] = df[content]
     df['cleaned'] = df.original.apply(basic_clean).apply(remove_stopwords)
     df['stemmed'] = df.cleaned.apply(stem)
     df['lemmatized'] = df.cleaned.apply(lemmatize)
+    df['length'] = df.cleaned.apply(len)
     df.drop(columns=content, inplace=True)
+    if model:
+        df['word_count'] = df.lemmatized.apply(n_words)
+        df['unique_words'] = df.cleaned.apply(n_unique_words)
+        df = drop_outliers(df)
     return df
 
-def get_prepped(csv=CSV, fresh=False):
-    if os.path.exists('prepped_' + csv) and not fresh:
-        df = pd.read_csv('prepped_' + csv, index_col = 0)
-    else:
-        df = pd.read_csv(csv, index_col = 0)
-        df = prepare_article_data(df)
-        df.to_csv('prepped_' + csv)
-    return df
-
-def prep(json='prepped_data.json', fresh=False):
+def prep(json='prepped_data.json', fresh=False, model=False):
     if os.path.exists(json) and not fresh:
         df = pd.read_json(json)
     else:
         df = pd.read_json('data.json')
-        df = prepare_article_data(df)
+        df = prepare_article_data(df, model=model)
         df = df.rename(columns={'repo': 'title'})
         df.to_json(json)
     return df

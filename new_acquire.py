@@ -3,7 +3,7 @@ A module for obtaining repo readme and language data from the github API.
 Before using this module, read through it, and follow the instructions marked
 TODO.
 After doing so, run it like this:
-    python acquire.py
+    python new_acquire.py
 To create the `data.json` file that contains the data.
 """
 import os
