@@ -99,11 +99,12 @@ def prepare_article_data(df, model, content='readme_contents'):
     return df
 
 def prep(json='prepped_data.json', fresh=False, model=False):
-    if os.path.exists(json) and not fresh:
+    if os.path.exists(json) and not fresh and not model:
         df = pd.read_json(json)
     else:
         df = pd.read_json('data.json')
         df = prepare_article_data(df, model=model)
         df = df.rename(columns={'repo': 'title'})
-        df.to_json(json)
+        if not model:
+            df.to_json(json)
     return df

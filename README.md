@@ -16,7 +16,8 @@ Instructions on setting up the GitHub README project and necessary steps to succ
 - Ensure you've installed the following: Python 3.7, pandas, NLTK, scikit-learn, wordcloud, and numpy.
 - Also download wordnet and stopwords from the NLTK package.
 - Should you hope to update the READMEs on which the model is trained, you will also need to install bs4, the BeautifulSoup package, and configure an env.py file with two environment variables (github_token, github_username). Click [here](https://github.com/settings/tokens) to generate a personal access token for the github API.
-- To run the model, 
+- To run the model, first save the README file you'd like to analyze in your local repository as 'input.md'
+- Then, run python predict.py from the terminal. It should print out our model's predicted language.
 
 ## Organization
 
@@ -50,9 +51,15 @@ Instructions on setting up the GitHub README project and necessary steps to succ
 
 **stem:** reducing words to their root (or stem). simply removes ends of words and preserves the beginning that matches other words (e.g. stemming -> stem, stems -> stem, stemmata -> stem)
 
-**lemmatize:** reduces words to their grammatical base. Notably different from stemming with irregular words (e.g. better -> good). 
+**lemmatize:** reduces words to their grammatical base (or lemma) Notably different from stemming with irregular words (e.g. better -> good). 
 
 **corpus:** full set of documents or other text materials
+
+**term frequency:**
+
+**inverse document frequency:**
+
+**TF-IDF:**
 
 ### Data Dictionary
 
