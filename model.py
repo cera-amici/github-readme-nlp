@@ -70,29 +70,23 @@ if __name__ == '__main__':
 
     store_model(dt)
 
-# score_diff = 1
-# leaf = 1
+def prevent_overfitting(tree_function, train, test):
+    score_diff = 1
+    leaf = 1
 
-# while score_diff > .06:
-#     rf = RandomForestClassifier(criterion='entropy', min_samples_leaf=leaf, random_state=123)
-#     rf.fit(x_train, y_train)
-#     train['predicted'] = rf.predict(x_train)
-#     test['predicted'] = rf.predict(x_test)
-#     train_acc = score(train.actual, train.predicted)[2].mean()
-#     test_acc = score(test.actual, test.predicted)[2].mean()
-#     score_diff = train_acc - test_acc
-#     leaf += 1
+    while score_diff > .06:
+        model = tree_function(criterion='entropy', min_samples_leaf=leaf, random_state=123)
+        model.fit(x_train, y_train)
+        train['predicted'] = model.predict(x_train)
+        test['predicted'] = model.predict(x_test)
+        train_acc = score(train.actual, train.predicted)[2].mean()
+        test_acc = score(test.actual, test.predicted)[2].mean()
+        score_diff = train_acc - test_acc
+        leaf += 1
 
-# rf = RandomForestClassifier(criterion='entropy', min_samples_leaf=19, random_state=123)
-# rf.fit(x_train, y_train)
-# train['predicted'] = rf.predict(x_train)
-# test['predicted'] = rf.predict(x_test)
-# train_acc = score(train.actual, train.predicted)[2].mean()
-# test_acc = score(test.actual, test.predicted)[2].mean()
-# score_diff = train_acc - test_acc
-
-# print(f'leaf = {leaf}')
-# print(f'train acc = {train_acc}')
-# print(f'test acc = {test_acc}')
+    print(f'leaf = {leaf}')
+    print(f'train acc = {train_acc}')
+    print(f'test acc = {test_acc}')
+    return model
 
 # scaled_df = m
