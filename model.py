@@ -42,14 +42,24 @@ def store_model(model_object):
         pickle.dump(model_object, fp)
 
 def get_model():
-    with open ('model.pickle', 'rb') as fp:
+    with open('model.pickle', 'rb') as fp:
         model = pickle.load(fp)
     return model
+
+def store_vectorizer(tfidf_object):
+    with open('vectorizer.pickle', 'wb') as fp:
+        pickle.dump(tfidf_object, fp)
+    
+def get_vectorizer():
+    with open('vectorizer.pickle', 'rb') as fp:
+        vectorizer = pickle.load(fp)
+    return vectorizer
 
 def prevent_overfitting(tree_function, df, store=False):
     tfidf = TfidfVectorizer()
     x = tfidf.fit_transform(df.lemmatized)
     y = df.language
+    store_vectorizer(tfidf)
 
     x_train, x_test, y_train, y_test = train_test_split(x, y, stratify=y, test_size=.2, random_state=42)
 
