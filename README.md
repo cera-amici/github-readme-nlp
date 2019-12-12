@@ -63,7 +63,7 @@ Instructions on setting up the GitHub README project and necessary steps to succ
 
 **TF-IDF:** the product of the TF and IDF
 
-**Stopwords:** words that are very common and are usually removed
+**stopwords:** words that are very common and are usually removed
 
 ### Data Dictionary
 
